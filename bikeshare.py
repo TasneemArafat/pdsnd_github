@@ -8,6 +8,30 @@ CITY_DATA = { 'chicago': 'chicago.csv',
 
 Months = ['january', 'february', 'march', 'april', 'may', 'june']
 
+def check_data_entry(input_message, valid_inputs):
+    """
+    Asks user to add an input and verifies the data
+
+    args:
+        (str) input_message - message to ask user for input
+        (List) valida_input - List of valid values
+    Returns:
+        (str) user_input - returns user input
+    """
+
+    try:
+        user_input = str(input(input_message)).lower()
+        while(user_input not in valid_inputs):
+            print('Looks you added a wrong value!')
+            print('Please try again')
+            user_input = str(input(input_message)).lower()
+        
+        print('Great you chose: {}\n'.format(user_input))
+        return user_input
+    
+    except:
+        print('There seems to be an issue with the input :(')
+
 def get_filters():
     """
     Asks user to specify a city, month, and day to analyze.
@@ -19,28 +43,20 @@ def get_filters():
     """
     print('Hello! Let\'s explore some US bikeshare data!')
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
-    city = input("For which city Would you like to get the data for chicago, new york city or Washington?\n")
-    while(city.lower() not in CITY_DATA):
-        city = input("Please input one of the three cities chicago, new york city or washington\n")
+    city_message = "For which city Would you like to get the data for chicago, new york city or Washington?"
+    city = check_data_entry(city_message, CITY_DATA.keys())
+
     # TO DO: get user input for month (all, january, february, ... , june)
-    month_day_filter = input("Would you like to specify a month and day filter? Y or N\n")
-    while(month_day_filter.lower() != 'n' and month_day_filter.lower() != "y"):
-        month_day_filter = input("Please add a valid value Y or N\n")
-    if month_day_filter.lower() == "n":
-        day = "all"
-        month = "all"
-    else:
-        month = input("For which month you want the data for january, february, march, april, may, june or all?\n")
-        while(month.lower() not in Months and month.lower() != 'all'):
-            month = input("Please type a valid month january, february, march, april, may, june or all\n")
+    month_message = "For which month you want the data for january, february, march, april, may, june or all?"
+    month = check_data_entry(month_message, Months)
+
     # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
-        days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
-        day = input("For Which day of the week would you like the data for monday, tuesday, wednesday, thursday, friday,    saturday, sunday or all?\n")
-        while(day.lower() not in days and day.lower() != "all"):
-            day = input("Please add a valid day or all\n")
+    day_message = "For Which day of the week would you like the data for monday, tuesday, wednesday, thursday, friday,    saturday, sunday or all?"
+    days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+    day = check_data_entry(day_message, days)
     
-        print('-'*40)
-    return city.lower() , month.lower() , day.lower()
+    print('-'*40)
+    return city , month , day
 
 
 def load_data(city, month, day):
