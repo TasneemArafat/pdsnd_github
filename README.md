@@ -7,7 +7,7 @@ This project and documentation were created on **4th of September 2023**
 
 ### Description
 This project is part of the Udacity course: *Programming for Data Science with Python*
-In this project In this project we use data provided by **Motivate**, 
+In this project we use data provided by **Motivate**, 
 a bike share system provider for many major cities in the United States, to uncover bike share usage patterns. 
 We compare the system usage between three large cities: Chicago, New York City and Washington, DC.
 
