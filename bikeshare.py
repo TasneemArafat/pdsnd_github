@@ -1,12 +1,13 @@
 import time
 import pandas as pd
 import numpy as np
+from tabulate import tabulate
 
 CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
               'washington': 'washington.csv' }
 
-Months = ['january', 'february', 'march', 'april', 'may', 'june']
+Months = ['january', 'february', 'march', 'april', 'may', 'june', 'all']
 
 def check_data_entry(input_message, valid_inputs):
     """
@@ -52,7 +53,7 @@ def get_filters():
 
     # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
     day_message = "For Which day of the week would you like the data for monday, tuesday, wednesday, thursday, friday,    saturday, sunday or all?"
-    days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+    days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday', 'all']
     day = check_data_entry(day_message, days)
     
     print('-'*40)
@@ -77,7 +78,7 @@ def load_data(city, month, day):
     df['Start Time'] = pd.to_datetime(df['Start Time'])
     # extract month and day of week from Start Time to create new columns
     df['month'] = df['Start Time'].dt.month
-    df['day_of_week'] = df['Start Time'].dt.weekday_name
+    df['day_of_week'] = df['Start Time'].dt.day_name()
     
     # filter by month if applicable
     if month != 'all':
@@ -188,12 +189,9 @@ def raw_data(df, index = 1):
     if raw_data_value.lower() == 'n':
         return
     else:
-        index = index + 1
-        if(index > df.shape[0]):
-            return
-        print(df.head(index + 1))
-        raw_data(df, index)
-            
+        print(tabulate(df.iloc[np.arange(0+index, 5+index)]))
+        index+=5
+        raw_data(df, index)    
 
 def main():
     while True:
