@@ -26,5 +26,8 @@ The files used are Datasets from [Motivate](https://motivateco.com/)
 
 *The files can be downloaded from [here](https://capitalbikeshare.com/system-data)*
 
+#### Datasets example:
+![Data for the first 10 rides in the new_york_city.csv file](nyc-data.png)
+
 ### Credits
 This repo was forked from [udacity/pdsnd_github](https://github.com/udacity/pdsnd_github)
